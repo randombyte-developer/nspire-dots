@@ -165,6 +165,8 @@ function on.charIn(input)
     if (input == "1") then
         dot.spawn()
         boom.reset()
+    elseif(input == "d") then
+        debug = not debug
     end
 end
 
