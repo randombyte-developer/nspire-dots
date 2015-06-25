@@ -24,7 +24,8 @@ local boom = {
             color = {0, 153, 0},
             nc = {255, 51, 204}
         }
-    }
+    },
+    hitAngle = -1
 }
 
 local dot = {
@@ -79,7 +80,9 @@ function boom.tick()
                     ((boom.x - dot.x) * (boom.x - dot.x)) +
                     ((boom.y - dot.y) * (boom.y - dot.y))
                 ) <= boom.r + dot.r) then
-            
+                
+                boom.hitAngle = math.atan2(dot.x - boom.x, dot.y - boom.y)
+                
                 boom.reset()
                 dot.spawn()
                 c = true
@@ -179,7 +182,7 @@ function on.paint(gc)
     if (debug) then
         drawDebug(gc)
     end
-    
+
     boom.draw(gc)
     dot.draw(gc)
 end
@@ -204,7 +207,7 @@ function drawDebug(gc)
         end
         
         gc:clp(colors.black)
-        gc:drawString("d=".. dot.direction ..";speed=".. dot.speed ..";fired=".. (boom.fired and "true" or "false") ..";b.x=".. boom.x, 10, 5)
+        gc:drawString("speed=".. dot.speed ..";c=".. (c and "true" or "false") ..";hitAngle=".. boom.hitAngle, 10, 5)
         
         gc:cl(255, 0, 255)
         gc:drawLine(boom.x, boom.y, dot.x, dot.y)
