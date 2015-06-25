@@ -203,6 +203,12 @@ function drawDebug(gc)
         
         gc:clp(colors.black)
         gc:drawString("d=".. dot.direction ..";speed=".. dot.speed ..";fired=".. (boom.fired and "true" or "false") ..";b.x=".. boom.x, 10, 5)
+        
+        gc:cl(255, 0, 255)
+        gc:drawLine(boom.x, boom.y, dot.x, dot.y)
+        gc:cl(0, 255, 0)
+        gc:drawLine(boom.x, boom.y, dot.x, boom.y)
+        gc:drawLine(dot.x, boom.y, dot.x, dot.y)
 end
 
 function intoGC(k, v)
