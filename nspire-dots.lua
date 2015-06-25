@@ -1,4 +1,4 @@
---NspireDots by RandomByte
+--NspireDots by RandomByte(apps.randombyteqgmail.com; https://github.com/randombyte-developer)
 
 local debug = true
 
@@ -72,11 +72,18 @@ function boom.tick()
             c = false
         end
         
-        --collision check
+        --collision check(rect)
         if (boom.x + boom.r > dot.x and dot.y - dot.r <= boom.y + boom.r and dot.y + dot.r >= boom.y - boom.r) then
-            boom.reset()
-            dot.spawn()
-            c = true
+            --collision check(circle, Pythagorean theorem)
+            if (math.sqrt(
+                    ((boom.x - dot.x) * (boom.x - dot.x)) +
+                    ((boom.y - dot.y) * (boom.y - dot.y))
+                ) <= boom.r + dot.r) then
+            
+                boom.reset()
+                dot.spawn()
+                c = true
+            end
         end
     end
 end
